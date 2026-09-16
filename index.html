@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בוקר טוב | לדעת כל בוקר שהכול בסדר</title>
+<meta name="description" content="אפליקציה פשוטה להורים שגרים לבד: לחיצה אחת בכל בוקר, ואם אין לחיצה, המשפחה יודעת. מחפשים 20 משפחות לפיילוט.">
+<meta property="og:title" content="כל בוקר אמא לוחצת על כפתור אחד">
+<meta property="og:description" content="ואם היא לא לוחצת? הטלפון שלך מצלצל. אפליקציה פשוטה להורים שגרים לבד.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1F2A44">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231F9D55'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#141B2D;--navy:#1F2A44;--navy-2:#2E3B5E;--sky:#C8D1E6;--green:#1F9D55;--green-d:#147A42;--green-t:#DDF3E6;--muted:#5B6275;--line:#E3E6EC;--field:#C9CED9;--soft:#F5F6F8;--err:#B42318;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:Rubik,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#fff;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:560px;margin:0 auto;padding:0 22px}
+.hero{background:var(--navy);color:#fff;padding:18px 0 44px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
+.brand svg{width:28px;height:28px;flex-shrink:0}
+h1{font-size:clamp(30px,8.4vw,42px);line-height:1.2;font-weight:700;margin-top:34px;text-wrap:balance}
+h1 span{display:block;margin-top:6px}
+.sub{color:var(--sky);font-size:18px;margin-top:16px;text-wrap:pretty}
+.cta{display:flex;align-items:center;justify-content:center;min-height:58px;margin-top:26px;background:var(--green);color:#fff;font-weight:700;font-size:19px;text-decoration:none;border-radius:16px;padding:0 24px}
+.device{margin:38px auto 0;width:min(78vw,300px);background:#fff;color:var(--ink);border-radius:36px;border:9px solid var(--navy-2);padding:26px 18px 30px;text-align:center}
+.device .hi{font-weight:700;font-size:22px}
+.device .date,.device .note{color:var(--muted);font-size:14px}
+.okbtn{width:min(48vw,178px);aspect-ratio:1;border-radius:50%;background:var(--green);color:#fff;margin:20px auto 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;font-size:26px;line-height:1.1}
+.okbtn svg{width:40px;height:40px}
+section{padding:44px 0}
+section+section{border-top:1px solid var(--line)}
+h2{font-size:26px;line-height:1.25;font-weight:700;margin-bottom:18px;text-wrap:balance}
+.steps{list-style:none;counter-reset:s;display:grid;gap:18px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center}
+.steps li::before{content:counter(s);width:44px;height:44px;border-radius:50%;background:var(--green-t);color:var(--green-d);font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
+.lead{color:var(--muted);text-wrap:pretty}
+.feats{list-style:none;margin-top:20px;display:grid;gap:12px}
+.feats li{display:flex;gap:12px;align-items:center;font-weight:500}
+.feats svg{width:26px;height:26px;flex-shrink:0;color:var(--green)}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price strong{font-size:52px;line-height:1;font-weight:700;letter-spacing:-.5px}
+.price>span{font-size:19px;color:var(--muted)}
+.fine{color:var(--muted);font-size:15px;margin-top:14px}
+.field{margin-bottom:22px}
+.group{font-weight:700;font-size:19px;margin:32px 0 14px}
+.lbl,legend{display:block;font-weight:500;margin-bottom:8px}
+fieldset{border:0;min-width:0}
+input[type=text],input[type=tel],select{width:100%;height:54px;border:1.5px solid var(--field);border-radius:14px;padding:0 14px;font:inherit;font-size:17px;color:var(--ink);background:#fff}
+select{appearance:none;-webkit-appearance:none;padding-left:44px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%235B6275' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat left 14px center/20px}
+.opt{display:flex;align-items:center;gap:12px;min-height:54px;padding:10px 14px;border:1.5px solid var(--field);border-radius:14px;margin-bottom:8px;cursor:pointer}
+.opt input,.consent input{width:22px;height:22px;accent-color:var(--green);flex-shrink:0}
+.opt:has(input:checked){border-color:var(--green);background:#F2FAF5}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--muted);cursor:pointer}
+.consent input{margin-top:3px}
+.err{display:none;color:var(--err);font-size:14px;margin-top:6px}
+.has-err .err{display:block}
+.has-err input[type=text],.has-err input[type=tel],.has-err select,.has-err .opt{border-color:var(--err)}
+.submit{width:100%;min-height:58px;border:0;border-radius:16px;background:var(--green);color:#fff;font:inherit;font-weight:700;font-size:19px;cursor:pointer}
+.submit[disabled]{opacity:.7;cursor:progress}
+.form-err{display:none;color:var(--err);font-size:15px;margin-top:12px}
+.done{display:none;background:var(--green-t);color:var(--green-d);border-radius:18px;padding:22px;font-weight:500}
+.hp{position:absolute;right:-9999px;width:1px;height:1px;overflow:hidden}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.done:focus-visible{outline:3px solid #6AA8FF;outline-offset:3px}
+footer{background:var(--soft);color:var(--muted);font-size:14px;padding:28px 0 44px}
+footer p+p{margin-top:8px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="wrap">
+  <div class="brand">
+   <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#1F9D55"/><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   בוקר טוב
+  </div>
+  <h1>כל בוקר אמא לוחצת על כפתור אחד.<span>ואם היא לא לוחצת? הטלפון שלך מצלצל.</span></h1>
+  <p class="sub">אפליקציה פשוטה להורים שגרים לבד. היא עדיין בפיתוח, ואנחנו מחפשים 20 משפחות ראשונות שיצטרפו לפיילוט.</p>
+  <a class="cta" href="#join">השאירו פרטים</a>
+  <div class="device" aria-hidden="true">
+   <div class="hi">בוקר טוב, רחל</div>
+   <div class="date">יום שלישי בבוקר</div>
+   <div class="okbtn">
+    <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    אני בסדר
+   </div>
+   <div class="note">דני ומיכל יקבלו עדכון</div>
+  </div>
+ </div>
+</header>
+
+<main>
+ <section>
+  <div class="wrap">
+   <h2>איך זה עובד?</h2>
+   <ol class="steps">
+    <li><span>כל בוקר אמא או אבא לוחצים על <span style="white-space:nowrap">"אני בסדר"</span>. זה כל מה שהם צריכים לעשות.</span></li>
+    <li><span>אם עברה השעה שקבעתם והם עוד לא לחצו, הם מקבלים תזכורת.</span></li>
+    <li><span>אם גם אחרי התזכורת אין לחיצה, כל המשפחה מקבלת התראה, ואתם מחליטים מי מתקשר לבדוק.</span></li>
+   </ol>
+  </div>
+ </section>
+
+ <section>
+  <div class="wrap">
+   <h2>כבר יש לחצן מצוקה?</h2>
+   <p class="lead">מצוין, אל תוותרו עליו. לחצן עוזר רק למי שמצליח ללחוץ. כאן זה עובד הפוך: אם אמא לא לחצה בבוקר, אתם יודעים על זה.</p>
+   <ul class="feats">
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>בעברית, ברוסית ובערבית</li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>מצב שבת וחג, בלי התראות מיותרות</li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>מנוי אחד לכל המשפחה, וכל האחים בתמונה</li>
+   </ul>
+  </div>
+ </section>
+
+ <section>
+  <div class="wrap">
+   <h2>כמה זה עולה?</h2>
+   <div class="price"><strong><span data-price>29.90</span> ₪</strong><span>לחודש, לכל המשפחה</span></div>
+   <p class="fine">ההרשמה לא מחייבת ולא עולה כלום. המחיר הסופי ייקבע לקראת ההשקה.</p>
+  </div>
+ </section>
+
+ <section id="join">
+  <div class="wrap">
+   <h2>השאירו פרטים ונחזור אליכם</h2>
+   <p class="lead" style="margin-bottom:24px">זה לוקח דקה. נתחיל מ-20 המשפחות הראשונות.</p>
+
+   <form id="form" novalidate>
+    <div class="field" data-field="fullname">
+     <label class="lbl" for="fullname">שם</label>
+     <input type="text" id="fullname" name="fullname" autocomplete="name" aria-describedby="e-fullname">
+     <div class="err" id="e-fullname"></div>
+    </div>
+
+    <div class="field" data-field="phone">
+     <label class="lbl" for="phone">טלפון נייד</label>
+     <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="050-1234567" dir="ltr" style="text-align:right" aria-describedby="e-phone">
+     <div class="err" id="e-phone"></div>
+    </div>
+
+    <p class="group">ועכשיו קצת על אמא או אבא:</p>
+
+    <div class="field" data-field="parent_age">
+     <label class="lbl" for="parent_age">גיל</label>
+     <select id="parent_age" name="parent_age" aria-describedby="e-parent_age">
+      <option value="">בחרו</option>
+      <option value="under70">פחות מ-70</option>
+      <option value="70-79">70 עד 79</option>
+      <option value="80-89">80 עד 89</option>
+      <option value="90plus">90 ומעלה</option>
+     </select>
+     <div class="err" id="e-parent_age"></div>
+    </div>
+
+    <fieldset class="field" data-field="smartphone" aria-describedby="e-smartphone">
+     <legend>סוג הטלפון</legend>
+     <label class="opt"><input type="radio" name="smartphone" value="yes"><span>סמארטפון</span></label>
+     <label class="opt"><input type="radio" name="smartphone" value="basic"><span>טלפון רגיל, לא חכם</span></label>
+     <label class="opt"><input type="radio" name="smartphone" value="unsure"><span>לא בטוחים</span></label>
+     <div class="err" id="e-smartphone"></div>
+    </fieldset>
+
+    <div class="field" data-field="language">
+     <label class="lbl" for="language">באיזו שפה הכי נוח להם לקרוא?</label>
+     <select id="language" name="language" aria-describedby="e-language">
+      <option value="">בחרו</option>
+      <option value="hebrew">עברית</option>
+      <option value="russian">רוסית</option>
+      <option value="arabic">ערבית</option>
+      <option value="amharic">אמהרית</option>
+      <option value="english">אנגלית</option>
+      <option value="other">אחרת</option>
+     </select>
+     <div class="err" id="e-language"></div>
+    </div>
+
+    <fieldset class="field" data-field="intent" aria-describedby="e-intent">
+     <legend>מה מעניין אתכם?</legend>
+     <label class="opt"><input type="radio" name="intent" value="notify"><span>תעדכנו אותי כשזה מוכן</span></label>
+     <label class="opt"><input type="radio" name="intent" value="pilot"><span>אני רוצה להצטרף לפיילוט, <span style="white-space:nowrap">ב-<span data-price>29.90</span> ₪ לחודש</span></span></label>
+     <div class="err" id="e-intent"></div>
+    </fieldset>
+
+    <div class="field" data-field="consent">
+     <label class="consent"><input type="checkbox" name="consent" value="yes" aria-describedby="e-consent">אפשר לחזור אליי ולשלוח לי עדכונים על האפליקציה, בטלפון, ב-SMS או בוואטסאפ.</label>
+     <div class="err" id="e-consent"></div>
+    </div>
+
+    <div class="hp" aria-hidden="true"><label>אתר <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <button class="submit" type="submit" id="submit">שליחה</button>
+    <p class="form-err" id="form-err" role="alert"></p>
+   </form>
+
+   <div class="done" id="done" tabindex="-1" role="status">קיבלנו, תודה! נחזור אליכם כשהפיילוט ייפתח.</div>
+  </div>
+ </section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <p>האפליקציה לא מחליפה לחצן מצוקה או שירותי חירום. במקרה חירום חייגו 101 למד"א.</p>
+  <p>נשתמש בפרטים רק כדי לחזור אליכם, ולא נעביר אותם לאף אחד.</p>
+  <p id="pixel-note" hidden>באתר מותקן פיקסל של Meta למדידת הפרסום.</p>
+ </div>
+</footer>
+
+<script>
+(function () {
+  // Paste your Google Apps Script web app URL here
+  var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxjpZBRrieXC9vZ5q20skq-6eRTQtwSMAHknqikGRELGYYLegxAjMm_xX3X_YgyvGsTpg/exec";
+  // Paste your Meta Pixel (dataset) ID here
+  var PIXEL_ID = "";
+
+  // Single-price test for a small budget. To split prices again: { a: "19.90", b: "29.90" }
+  var PRICES = { a: "29.90", b: "29.90" };
+
+  if (PIXEL_ID) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init", PIXEL_ID);
+    fbq("track", "PageView");
+    document.getElementById("pixel-note").hidden = false;
+  }
+
+  function load(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function save(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
+
+  var qs = new URLSearchParams(location.search);
+
+  var variant = qs.get("p");
+  if (variant !== "a" && variant !== "b") {
+    variant = load("bt_variant");
+    if (variant !== "a" && variant !== "b") {
+      variant = Math.random() < 0.5 ? "a" : "b";
+      save("bt_variant", variant);
+    }
+  }
+  var price = PRICES[variant];
+  document.querySelectorAll("[data-price]").forEach(function (el) { el.textContent = price; });
+
+  var source = qs.get("utm_source");
+  if (source) {
+    var content = qs.get("utm_content");
+    if (content) source += "/" + content;
+    save("bt_source", source);
+  } else {
+    source = load("bt_source") || "direct";
+  }
+
+  var form = document.getElementById("form");
+  var btn = document.getElementById("submit");
+  var formErr = document.getElementById("form-err");
+  var done = document.getElementById("done");
+
+  function fieldEl(name) { return form.querySelector('[data-field="' + name + '"]'); }
+  function showErr(name, msg) {
+    var f = fieldEl(name);
+    f.classList.add("has-err");
+    f.querySelector(".err").textContent = msg;
+  }
+  function clearAll() {
+    form.querySelectorAll(".has-err").forEach(function (f) { f.classList.remove("has-err"); });
+    formErr.style.display = "none";
+  }
+  function clearOn(e) {
+    var f = e.target.closest(".field");
+    if (f) f.classList.remove("has-err");
+  }
+  form.addEventListener("input", clearOn);
+  form.addEventListener("change", clearOn);
+
+  function showFormErr(msg) {
+    formErr.textContent = msg;
+    formErr.style.display = "block";
+  }
+  function showDone() {
+    form.style.display = "none";
+    done.style.display = "block";
+    done.focus();
+  }
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    clearAll();
+    var d = new FormData(form);
+    var ok = true;
+
+    var fullname = String(d.get("fullname") || "").trim();
+    if (!fullname) { showErr("fullname", "חסר שם"); ok = false; }
+
+    var digits = String(d.get("phone") || "").replace(/\D/g, "");
+    if (!/^0\d{8,9}$/.test(digits) && !/^972\d{8,9}$/.test(digits)) {
+      showErr("phone", "המספר לא תקין. כתבו למשל 050-1234567"); ok = false;
+    }
+    if (!d.get("parent_age")) { showErr("parent_age", "חסר גיל"); ok = false; }
+    if (!d.get("smartphone")) { showErr("smartphone", "בחרו אחת מהאפשרויות"); ok = false; }
+    if (!d.get("language")) { showErr("language", "חסרה שפה"); ok = false; }
+    if (!d.get("intent")) { showErr("intent", "בחרו אחת מהאפשרויות"); ok = false; }
+    if (!d.get("consent")) { showErr("consent", "בלי האישור הזה לא נוכל לחזור אליכם"); ok = false; }
+
+    if (!ok) {
+      var first = form.querySelector(".has-err input, .has-err select");
+      if (first) first.focus();
+      return;
+    }
+
+    if (d.get("website")) { showDone(); return; }
+
+    if (!FORM_ENDPOINT) {
+      showFormErr("הטופס עוד לא מחובר לגיליון. צריך להדביק את כתובת ה-Apps Script בקובץ.");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "שולחים…";
+
+    var body = new URLSearchParams({
+      fullname: fullname,
+      phone: digits,
+      parent_age: d.get("parent_age"),
+      smartphone: d.get("smartphone"),
+      language: d.get("language"),
+      intent: d.get("intent"),
+      price_variant: price,
+      source: source,
+      consent: "yes"
+    });
+
+    fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: body })
+      .then(function () {
+        if (window.fbq) window.fbq("track", "Lead");
+        showDone();
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = "שליחה";
+        showFormErr("משהו השתבש והפרטים לא נשלחו. נסו שוב בעוד רגע.");
+      });
+  });
+})();
+</script>
+</body>
+</html>
