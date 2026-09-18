@@ -50,7 +50,7 @@ h2{font-size:26px;line-height:1.25;font-weight:700;margin-bottom:18px;text-wrap:
 .group{font-weight:700;font-size:19px;margin:32px 0 14px}
 .lbl,legend{display:block;font-weight:500;margin-bottom:8px}
 fieldset{border:0;min-width:0}
-input[type=text],input[type=tel],select{width:100%;height:54px;border:1.5px solid var(--field);border-radius:14px;padding:0 14px;font:inherit;font-size:17px;color:var(--ink);background:#fff}
+input[type=text],input[type=tel],input[type=email],select{width:100%;height:54px;border:1.5px solid var(--field);border-radius:14px;padding:0 14px;font:inherit;font-size:17px;color:var(--ink);background:#fff}
 select{appearance:none;-webkit-appearance:none;padding-left:44px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%235B6275' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat left 14px center/20px}
 .opt{display:flex;align-items:center;gap:12px;min-height:54px;padding:10px 14px;border:1.5px solid var(--field);border-radius:14px;margin-bottom:8px;cursor:pointer}
 .opt input,.consent input{width:22px;height:22px;accent-color:var(--green);flex-shrink:0}
@@ -59,11 +59,13 @@ select{appearance:none;-webkit-appearance:none;padding-left:44px;background:#fff
 .consent input{margin-top:3px}
 .err{display:none;color:var(--err);font-size:14px;margin-top:6px}
 .has-err .err{display:block}
-.has-err input[type=text],.has-err input[type=tel],.has-err select,.has-err .opt{border-color:var(--err)}
+.has-err input[type=text],.has-err input[type=tel],.has-err input[type=email],.has-err select,.has-err .opt{border-color:var(--err)}
 .submit{width:100%;min-height:58px;border:0;border-radius:16px;background:var(--green);color:#fff;font:inherit;font-weight:700;font-size:19px;cursor:pointer}
 .submit[disabled]{opacity:.7;cursor:progress}
 .form-err{display:none;color:var(--err);font-size:15px;margin-top:12px}
 .done{display:none;background:var(--green-t);color:var(--green-d);border-radius:18px;padding:22px;font-weight:500}
+.hint{color:var(--muted);font-size:14px;margin-top:8px}
+.extra{display:none;margin-top:28px;border-top:1px solid var(--line);padding-top:26px}
 .hp{position:absolute;right:-9999px;width:1px;height:1px;overflow:hidden}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.done:focus-visible{outline:3px solid #6AA8FF;outline-offset:3px}
 footer{background:var(--soft);color:var(--muted);font-size:14px;padding:28px 0 44px}
@@ -154,46 +156,11 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
      <div class="err" id="e-fullname"></div>
     </div>
 
-    <div class="field" data-field="phone">
-     <label class="lbl" for="phone">טלפון נייד</label>
-     <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="050-1234567" dir="ltr" style="text-align:right" aria-describedby="e-phone">
-     <div class="err" id="e-phone"></div>
-    </div>
-
-    <p class="group">ועכשיו קצת על אמא או אבא:</p>
-
-    <div class="field" data-field="parent_age">
-     <label class="lbl" for="parent_age">גיל</label>
-     <select id="parent_age" name="parent_age" aria-describedby="e-parent_age">
-      <option value="">בחרו</option>
-      <option value="under70">פחות מ-70</option>
-      <option value="70-79">70 עד 79</option>
-      <option value="80-89">80 עד 89</option>
-      <option value="90plus">90 ומעלה</option>
-     </select>
-     <div class="err" id="e-parent_age"></div>
-    </div>
-
-    <fieldset class="field" data-field="smartphone" aria-describedby="e-smartphone">
-     <legend>סוג הטלפון</legend>
-     <label class="opt"><input type="radio" name="smartphone" value="yes"><span>סמארטפון</span></label>
-     <label class="opt"><input type="radio" name="smartphone" value="basic"><span>טלפון רגיל, לא חכם</span></label>
-     <label class="opt"><input type="radio" name="smartphone" value="unsure"><span>לא בטוחים</span></label>
-     <div class="err" id="e-smartphone"></div>
-    </fieldset>
-
-    <div class="field" data-field="language">
-     <label class="lbl" for="language">באיזו שפה הכי נוח להם לקרוא?</label>
-     <select id="language" name="language" aria-describedby="e-language">
-      <option value="">בחרו</option>
-      <option value="hebrew">עברית</option>
-      <option value="russian">רוסית</option>
-      <option value="arabic">ערבית</option>
-      <option value="amharic">אמהרית</option>
-      <option value="english">אנגלית</option>
-      <option value="other">אחרת</option>
-     </select>
-     <div class="err" id="e-language"></div>
+    <div class="field" data-field="email">
+     <label class="lbl" for="email">אימייל</label>
+     <input type="email" id="email" name="email" autocomplete="email" inputmode="email" dir="ltr" style="text-align:right" aria-describedby="e-email">
+     <div class="err" id="e-email"></div>
+     <p class="hint">רק כדי לעדכן אתכם כשנפתח הפיילוט.</p>
     </div>
 
     <fieldset class="field" data-field="intent" aria-describedby="e-intent">
@@ -204,7 +171,7 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
     </fieldset>
 
     <div class="field" data-field="consent">
-     <label class="consent"><input type="checkbox" name="consent" value="yes" aria-describedby="e-consent">אפשר לחזור אליי ולשלוח לי עדכונים על האפליקציה, בטלפון, ב-SMS או בוואטסאפ.</label>
+     <label class="consent"><input type="checkbox" name="consent" value="yes" aria-describedby="e-consent">אפשר לשלוח לי עדכונים על האפליקציה במייל.</label>
      <div class="err" id="e-consent"></div>
     </div>
 
@@ -215,6 +182,49 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
    </form>
 
    <div class="done" id="done" tabindex="-1" role="status">קיבלנו, תודה! נחזור אליכם כשהפיילוט ייפתח.</div>
+
+   <div class="extra" id="extra">
+    <p class="group" style="margin-top:0">רוצים לעזור לנו לבנות את זה נכון?</p>
+    <p class="lead" style="margin-bottom:20px">שלוש שאלות קצרות על אמא או אבא, אם בא לכם.</p>
+
+    <div class="field">
+     <label class="lbl" for="parent_age">גיל</label>
+     <select id="parent_age" name="parent_age">
+      <option value="">בחרו</option>
+      <option value="under70">פחות מ-70</option>
+      <option value="70-79">70 עד 79</option>
+      <option value="80-89">80 עד 89</option>
+      <option value="90plus">90 ומעלה</option>
+     </select>
+    </div>
+
+    <div class="field">
+     <label class="lbl" for="smartphone">סוג הטלפון</label>
+     <select id="smartphone" name="smartphone">
+      <option value="">בחרו</option>
+      <option value="yes">סמארטפון</option>
+      <option value="basic">טלפון רגיל, לא חכם</option>
+      <option value="unsure">לא בטוחים</option>
+     </select>
+    </div>
+
+    <div class="field">
+     <label class="lbl" for="language">באיזו שפה הכי נוח להם לקרוא?</label>
+     <select id="language" name="language">
+      <option value="">בחרו</option>
+      <option value="hebrew">עברית</option>
+      <option value="russian">רוסית</option>
+      <option value="arabic">ערבית</option>
+      <option value="amharic">אמהרית</option>
+      <option value="english">אנגלית</option>
+      <option value="other">אחרת</option>
+     </select>
+    </div>
+
+    <button class="submit" type="button" id="extra-submit">שליחה</button>
+   </div>
+
+   <div class="done" id="extra-done" role="status">תודה, זה עוזר לנו מאוד.</div>
   </div>
  </section>
 </main>
@@ -229,20 +239,13 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
 
 <script>
 (function () {
-  // Paste your Google Apps Script web app URL here
-  var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxjpZBRrieXC9vZ5q20skq-6eRTQtwSMAHknqikGRELGYYLegxAjMm_xX3X_YgyvGsTpg/exec";
-  // Paste your Meta Pixel (dataset) ID here
-  var PIXEL_ID = "";
+  // להדביק כאן את כתובת ה-Apps Script, בין המירכאות. היא מתחילה ב-https://script.google.com/macros/s/
+  var FORM_ENDPOINT = "";
 
   // Single-price test for a small budget. To split prices again: { a: "19.90", b: "29.90" }
   var PRICES = { a: "29.90", b: "29.90" };
 
-  if (PIXEL_ID) {
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
-    fbq("init", PIXEL_ID);
-    fbq("track", "PageView");
-    document.getElementById("pixel-note").hidden = false;
-  }
+  if (window.fbq) document.getElementById("pixel-note").hidden = false;
 
   function load(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
   function save(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
@@ -301,6 +304,15 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
     done.focus();
   }
 
+  function send(extra) {
+    var body = new URLSearchParams(extra);
+    body.set("price_variant", price);
+    body.set("source", source);
+    return fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: body });
+  }
+
+  var signup = {};
+
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
     clearAll();
@@ -310,13 +322,10 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
     var fullname = String(d.get("fullname") || "").trim();
     if (!fullname) { showErr("fullname", "חסר שם"); ok = false; }
 
-    var digits = String(d.get("phone") || "").replace(/\D/g, "");
-    if (!/^0\d{8,9}$/.test(digits) && !/^972\d{8,9}$/.test(digits)) {
-      showErr("phone", "המספר לא תקין. כתבו למשל 050-1234567"); ok = false;
+    var email = String(d.get("email") || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      showErr("email", "האימייל לא תקין"); ok = false;
     }
-    if (!d.get("parent_age")) { showErr("parent_age", "חסר גיל"); ok = false; }
-    if (!d.get("smartphone")) { showErr("smartphone", "בחרו אחת מהאפשרויות"); ok = false; }
-    if (!d.get("language")) { showErr("language", "חסרה שפה"); ok = false; }
     if (!d.get("intent")) { showErr("intent", "בחרו אחת מהאפשרויות"); ok = false; }
     if (!d.get("consent")) { showErr("consent", "בלי האישור הזה לא נוכל לחזור אליכם"); ok = false; }
 
@@ -335,23 +344,19 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
 
     btn.disabled = true;
     btn.textContent = "שולחים…";
+    signup = { fullname: fullname, email: email };
 
-    var body = new URLSearchParams({
+    send({
+      stage: "signup",
       fullname: fullname,
-      phone: digits,
-      parent_age: d.get("parent_age"),
-      smartphone: d.get("smartphone"),
-      language: d.get("language"),
+      email: email,
       intent: d.get("intent"),
-      price_variant: price,
-      source: source,
       consent: "yes"
-    });
-
-    fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: body })
+    })
       .then(function () {
         if (window.fbq) window.fbq("track", "Lead");
         showDone();
+        document.getElementById("extra").style.display = "block";
       })
       .catch(function () {
         btn.disabled = false;
@@ -359,6 +364,25 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
         showFormErr("משהו השתבש והפרטים לא נשלחו. נסו שוב בעוד רגע.");
       });
   });
+
+  var extraBtn = document.getElementById("extra-submit");
+  extraBtn.addEventListener("click", function () {
+    var answers = { stage: "details", fullname: signup.fullname, email: signup.email };
+    ["parent_age", "smartphone", "language"].forEach(function (id) {
+      var v = document.getElementById(id).value;
+      if (v) answers[id] = v;
+    });
+    extraBtn.disabled = true;
+    extraBtn.textContent = "שולחים…";
+    send(answers).then(function () {
+      document.getElementById("extra").style.display = "none";
+      document.getElementById("extra-done").style.display = "block";
+    }).catch(function () {
+      extraBtn.disabled = false;
+      extraBtn.textContent = "שליחה";
+    });
+  });
+
 })();
 </script>
 </body>
