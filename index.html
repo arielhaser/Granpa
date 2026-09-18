@@ -237,10 +237,11 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
  </div>
 </footer>
 
+<script src="config.js"></script>
 <script>
 (function () {
-  // להדביק כאן את כתובת ה-Apps Script, בין המירכאות. היא מתחילה ב-https://script.google.com/macros/s/
-  var FORM_ENDPOINT = "";
+  // הכתובת של ה-Apps Script נמצאת בקובץ config.js, כדי שעדכון של הדף לא ימחק אותה
+  var FORM_ENDPOINT = window.FORM_ENDPOINT || "";
 
   // Single-price test for a small budget. To split prices again: { a: "19.90", b: "29.90" }
   var PRICES = { a: "29.90", b: "29.90" };
@@ -338,7 +339,7 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
     if (d.get("website")) { showDone(); return; }
 
     if (!FORM_ENDPOINT) {
-      showFormErr("הטופס עוד לא מחובר לגיליון. צריך להדביק את כתובת ה-Apps Script בקובץ.");
+      showFormErr("הטופס עוד לא מחובר לגיליון. צריך למלא את הכתובת בקובץ config.js.");
       return;
     }
 
