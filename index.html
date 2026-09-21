@@ -46,6 +46,7 @@ h2{font-size:26px;line-height:1.25;font-weight:700;margin-bottom:18px;text-wrap:
 .price strong{font-size:52px;line-height:1;font-weight:700;letter-spacing:-.5px}
 .price>span{font-size:19px;color:var(--muted)}
 .fine{color:var(--muted);font-size:15px;margin-top:14px}
+.free{display:inline-block;background:var(--green-t);color:var(--green-d);font-weight:700;font-size:17px;border-radius:999px;padding:6px 16px;margin-bottom:16px}
 .field{margin-bottom:22px}
 .group{font-weight:700;font-size:19px;margin:32px 0 14px}
 .lbl,legend{display:block;font-weight:500;margin-bottom:8px}
@@ -98,7 +99,7 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
    וי יומי
   </div>
   <h1>כל בוקר אמא לוחצת על כפתור אחד.<span>ואם היא לא לוחצת? הטלפון שלך מצלצל.</span></h1>
-  <p class="sub">אפליקציה פשוטה להורים שגרים לבד. היא עדיין בפיתוח, ואנחנו מחפשים 20 משפחות ראשונות שיצטרפו לפיילוט.</p>
+  <p class="sub">אפליקציה פשוטה להורים שגרים לבד. היא עדיין בפיתוח, ואנחנו מחפשים 20 משפחות ראשונות לפיילוט. החודש הראשון עלינו.</p>
   <a class="cta" href="#join">השאירו פרטים</a>
   <div class="device" aria-hidden="true">
    <div class="hi">בוקר טוב, רחל</div>
@@ -139,8 +140,9 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
  <section>
   <div class="wrap">
    <h2>כמה זה עולה?</h2>
-   <div class="price"><strong><span data-price>29.90</span> ₪</strong><span>לחודש, לכל המשפחה</span></div>
-   <p class="fine">ההרשמה לא מחייבת ולא עולה כלום. המחיר הסופי ייקבע לקראת ההשקה.</p>
+   <p class="free">החודש הראשון חינם</p>
+   <div class="price"><strong><span data-price>29.90</span> ₪</strong><span>לחודש, החל מהחודש השני</span></div>
+   <p class="fine">לפני שמתחילים נבקש פרטי תשלום, והחיוב הראשון יהיה רק בחודש השני. אפשר לבטל בכל רגע, בלי התחייבות. השארת פרטים כאן לא מחייבת בכלום.</p>
   </div>
  </section>
 
@@ -166,7 +168,7 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
     <fieldset class="field" data-field="intent" aria-describedby="e-intent">
      <legend>מה מעניין אתכם?</legend>
      <label class="opt"><input type="radio" name="intent" value="notify"><span>תעדכנו אותי כשזה מוכן</span></label>
-     <label class="opt"><input type="radio" name="intent" value="pilot"><span>אני רוצה להצטרף לפיילוט, <span style="white-space:nowrap">ב-<span data-price>29.90</span> ₪ לחודש</span></span></label>
+     <label class="opt"><input type="radio" name="intent" value="pilot"><span>אני רוצה להצטרף לפיילוט: חודש ראשון חינם, ואחר כך <span style="white-space:nowrap"><span data-price>29.90</span> ₪ לחודש</span></span></label>
      <div class="err" id="e-intent"></div>
     </fieldset>
 
@@ -307,7 +309,8 @@ src="https://www.facebook.com/tr?id=1506730471214142&ev=PageView&noscript=1"
 
   function send(extra) {
     var body = new URLSearchParams(extra);
-    body.set("price_variant", price);
+    // הסיומת free1m מסמנת בגיליון מי נרשם אחרי שהוצע חודש ראשון חינם
+    body.set("price_variant", price + "-free1m");
     body.set("source", source);
     return fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: body });
   }
